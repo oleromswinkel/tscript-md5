@@ -10,6 +10,8 @@ class MD5
 			var padded_bits = add_padding_bits();
 			# Step 2:
 			var preprocessed_message = append_length(padded_bits);
+			# Step 3 & 4:
+        	var processed_message = process_message(preprocessed_message);
 		}
 		
 		static function add_padding_bits()
@@ -40,13 +42,36 @@ class MD5
 		static function append_length(padded_message)
 		{
 			var original_size = _message.size() * 8;
-			var size_64bits = [0, 0, 0, 0, 0, 0, 0, 0]; # TODO
-			var test = null;
-			
+			var size_64bits = to_bytes(original_size);
 			var preprocessed_message = padded_message.concat(size_64bits);
 			return preprocessed_message;
 		}
-}
+		
+		static function to_bytes(number)
+		{
+			var byte_list = [];
+			var temp_number = number;
+			for var i in 0:4 do
+			{
+				var byte = integer % 256;
+				byte_list.push(byte);
+        		temp_number = temp_number // 256;
+			}
+			return byte_list.concat([0, 0, 0, 0]);
+		}
+		
+		static function initialize_md_buffer()
+		{
+        	var A = 1732584193;
+        	var B = 4023233417;
+        	var C = 2562383102;
+        	var D = 271733878;
 
+        	return [A, B, C, D]
+		}
+		
+		static function process_message(preprocessed_message)
+		{}
+}
 
 
