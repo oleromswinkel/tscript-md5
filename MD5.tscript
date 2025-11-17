@@ -1,0 +1,52 @@
+class MD5
+{
+	public:
+		static var _message = null;
+		
+		static function digest(message)
+		{
+			_message = message;
+			# Step 1:
+			var padded_bits = add_padding_bits();
+			# Step 2:
+			var preprocessed_message = append_length(padded_bits);
+		}
+		
+		static function add_padding_bits()
+		{
+			# Convert the message to a bit sequence
+			var message_bytes = encode();
+			
+			# Append '1' as per MD5 padding requirements
+			message_bytes.push(128);
+			
+			# Add '0's needed to pad the message
+			while (message_bytes.size() * 8) % 512 != 448 do
+			{
+            	message_bytes.push(0);
+			}
+			
+			return message_bytes;
+		}
+		
+		static function encode()
+		{
+			var utf8 = [];
+			for var i in 0:_message.size() do
+			{ utf8.push(_message[i]); }
+			return utf8;
+		}
+		
+		static function append_length(padded_message)
+		{
+			var original_size = _message.size() * 8;
+			var size_64bits = [0, 0, 0, 0, 0, 0, 0, 0]; # TODO
+			var test = null;
+			
+			var preprocessed_message = padded_message.concat(size_64bits);
+			return preprocessed_message;
+		}
+}
+
+
+
