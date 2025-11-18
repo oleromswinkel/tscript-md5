@@ -72,10 +72,10 @@ class MD5
 		
 		static function process_message(preprocessed_message)
 		{
-			var F = function(x, y, z) { return (x and y) or ((not x) and z) };
-        	var G = function(x, y, z) { return (x and z) or (y and (not z)) };
-        	var H = function(x, y, z) { return x xor y xor z };
-        	var I = function(x, y, z) { return y xor (x or (not z)) };
+			var F = function(x, y, z) { return (x and y) or ((not x) and z); };
+        	var G = function(x, y, z) { return (x and z) or (y and (not z)); };
+        	var H = function(x, y, z) { return x xor y xor z; };
+        	var I = function(x, y, z) { return y xor (x or (not z)); };
         	
         	
 		}
